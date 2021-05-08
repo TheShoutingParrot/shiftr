@@ -7,7 +7,7 @@ SRC_DIR		= src
 OBJ_DIR 	= obj
 EXAMPLES_DIR	= examples
 
-PREFIX		= /usr/local
+PREFIX		= /usr
 
 _DEPS		= shiftr.h
 DEPS		= $(patsubst %,$(INC_DIR)/%,$(_DEPS))
@@ -24,7 +24,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(DEPS)
 libshiftr.so: $(OBJ)
 	$(CC) -fPIC -shared -o $@ $^ $(CFLAGS) $(LIBS) $(DEFINES)
 
-examples: libshiftr.so
+examples: 
 	$(CC) -L. -lshiftr $(CFLAGS) $(EXAMPLES_DIR)/blink.c -o $(EXAMPLES_DIR)/blink
 	$(CC) -L. -lshiftr $(CFLAGS) $(EXAMPLES_DIR)/dance.c -o $(EXAMPLES_DIR)/dance
 
