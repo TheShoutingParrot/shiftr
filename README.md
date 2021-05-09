@@ -1,6 +1,6 @@
 # shiftr
 
-shiftr is a simple raspberry pi library for controlling shift registers (such as the 74595). 
+shiftr is a simple raspberry pi library for controlling [shift registers](https://en.wikipedia.org/wiki/Shift_register) (such as the 74595). 
 
 
 shiftr uses the bcm2835 library by default.
@@ -91,6 +91,42 @@ srClose();
 ```
 
 This example is included with the library and can be compiled simply by running `make examples` with the libraries [Makefile](Makefile).
+
+Here's a video of this program in action:
+
+![blink.c in action](media/blink-c-in-action.gif)
+
+The blue led on the right represents the reset input (reset is activated when it's low), the red one is connected to the data pin, the green one is connected to the output update pin and the yellow one is connected to the clock pin. In the GIF I run the program twice.
+
+## A more complex example
+
+The [dance.c](examples/dance.c) example writes actual values (0xA and 0x5) to the shift register.
+
+After the regular initialization the program runs this loop:
+
+```
+for(i = 0; i < 50; i++) {
+	/* shifts the value 0xA to the shift register */
+	srWriteValue(sr, 0xA);
+
+	/* updates the shift register output */
+	srUpdateOutput(sr);
+	srDelay(100);
+
+	/* shifts the value 0x5 to the shift register */
+	srWriteValue(sr, 0x5);
+
+	/* updates the shift register output */
+	srUpdateOutput(sr);
+	srDelay(100);
+}
+```
+
+Here you can see [dance.c](examples/dance.c) in action:
+
+![dance.c in action](media/dance-c-in-action.gif)
+
+The two red leds on the right (one is hidden behind wires) are connected to the serial outputs that allow the 74hc595 (and other shift registers) to connect to eachother.
 
 # Using the library
 
