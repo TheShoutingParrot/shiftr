@@ -18,6 +18,14 @@ void srDelay(size_t t) {
 #endif /* #ifdef USING_WPI */
 }
 
+void srMicroDelay(size_t t) {
+#ifdef USING_WPI
+	delayMicroseconds(t);
+#else
+	bcm2835_delayMicroseconds(t);
+#endif /* #ifdef USING_WPI */
+}
+
 void srSetPinAsOutput(uint8_t pin) {
 #ifdef USING_WPI
 	pinMode(pin, OUTPUT);

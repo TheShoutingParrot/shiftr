@@ -33,20 +33,20 @@ struct shiftRegister initShiftRegister(uint8_t pinN, uint8_t data, uint8_t clock
 }
 
 void srUpdateOutput(struct shiftRegister sr) {
-	srDelay(1);
+	srMicroDelay(1);
 	srWritePin(sr.pins.updateOutput, SR_HIGH);
-	srDelay(1);
+	srMicroDelay(1);
 	srWritePin(sr.pins.updateOutput, SR_LOW);
 }
 
 void srWriteBit(struct shiftRegister sr, bool bit) {
 	srWritePin(sr.pins.data, bit ? SR_HIGH : SR_LOW); /* We put the bit into the data pin */
 
-	srDelay(1);
+	srMicroDelay(1);
 
 	srWritePin(sr.pins.clock, SR_HIGH); /* We pull the clock high */
 
-	srDelay(1);
+	srMicroDelay(1);
 
 	srWritePin(sr.pins.clock, SR_LOW); /* Now the bit should be written to the shift register */
 }
@@ -76,7 +76,7 @@ void srWriteData(struct shiftRegister sr, bool *data) {
 
 	for(i = 0; i < sr.outputs; i++) {
 		srWriteBit(sr, *(data + i));
-		srDelay(1);
+		srMicroDelay(1);
 	}
 }
 

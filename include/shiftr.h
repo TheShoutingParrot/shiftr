@@ -17,7 +17,6 @@
 
 /* definitions */
 
-#define DEF_NUM_PINS    8
 #define SR_NO_PIN       255
 #define SR_HIGH         1
 #define SR_LOW          0
@@ -58,6 +57,7 @@ void srWriteValue(struct shiftRegister sr, uint64_t val);
 
 void srWritePin(uint8_t pin, bool out);
 void srDelay(size_t t);
+void srMicroDelay(size_t t);
 void srSetPinAsOutput(uint8_t pin);
 void srClose(void);
 void srInitGpioControl(void);
